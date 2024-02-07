@@ -507,16 +507,13 @@ offer valid for - 7 days'''
             final_prompt = '''Use the following model/person guidelines followed by final image prompt for generating images.
             **MODEL GUIDELINES**
             Nationality - Indian Origin. Preferably should represent a pan Indian look.
-            Gender - {0}.
-            Age Band - {1}.
-            Category - {2}.
-            Wear - {3}
-            {4}
+            Model Cuts - {0}
+            {1}
 
             **FINAL PROMPT FOR GENERATING IMAGE WHILE CONSIDERING THE ABOVE MODEL GUIDELINES**
-            {5}. There should be no text inside the image.
+            {2}. There should be no text inside the image.
 
-            '''.format(gender, age_band, category, wear, guidelines, prompt)
+            '''.format(Model_Cuts, guidelines, prompt)
         else:
             final_prompt = prompt
 
