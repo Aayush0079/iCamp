@@ -444,7 +444,7 @@ offer valid for - 7 days'''
                 #wear_band_tuple = tuple(df_model_guide['Wear'].unique())
                 #wear = st.selectbox('Wear', wear_band_tuple, index = 0)
 
-                filtered_df = df_model_guide[(df_model_guide['Model Cuts'] == Model_Cuts)  # & (df_model_guide['Category'] == category) & (df_model_guide['Age Band'] == age_band) & (df_model_guide['Wear'] == wear)]
+                filtered_df = df_model_guide[(df_model_guide['Model Cuts'] == Model_Cuts) ] # & (df_model_guide['Category'] == category) & (df_model_guide['Age Band'] == age_band) & (df_model_guide['Wear'] == wear)]
                 guidelines = filtered_df['Final Guidelines'].iloc[0]
 
 
