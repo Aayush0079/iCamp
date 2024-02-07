@@ -37,7 +37,7 @@ def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        if st.session_state["password"] == 'icamp123#':
+        if st.session_state["password"] == 'icici123#':
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store password
         else:
@@ -432,19 +432,19 @@ offer valid for - 7 days'''
 
             if enable_model_guidelines:
                 # Image cuts
-                gender_tuple = tuple(df_model_guide['Gender'].unique())
-                gender = st.selectbox('Gender', gender_tuple, index = 0)
+                Model_tuple = tuple(df_model_guide['Model Cuts'].unique())
+                Model_Cuts = st.selectbox('Model Cuts', Model_tuple, index = 0)
 
-                category_tuple = tuple(df_model_guide['Category'].unique())
-                category = st.selectbox('Category', category_tuple, index = 0)
+                #category_tuple = tuple(df_model_guide['Category'].unique())
+                #category = st.selectbox('Category', category_tuple, index = 0)
 
-                age_band_tuple = tuple(df_model_guide['Age Band'].unique())
-                age_band = st.selectbox('Age Band', age_band_tuple, index = 0)
+                #age_band_tuple = tuple(df_model_guide['Age Band'].unique())
+                #age_band = st.selectbox('Age Band', age_band_tuple, index = 0)
 
-                wear_band_tuple = tuple(df_model_guide['Wear'].unique())
-                wear = st.selectbox('Wear', wear_band_tuple, index = 0)
+                #wear_band_tuple = tuple(df_model_guide['Wear'].unique())
+                #wear = st.selectbox('Wear', wear_band_tuple, index = 0)
 
-                filtered_df = df_model_guide[(df_model_guide['Gender'] == gender) & (df_model_guide['Category'] == category) & (df_model_guide['Age Band'] == age_band) & (df_model_guide['Wear'] == wear)]
+                filtered_df = df_model_guide[(df_model_guide['Model Cuts'] == Model_Cuts)  # & (df_model_guide['Category'] == category) & (df_model_guide['Age Band'] == age_band) & (df_model_guide['Wear'] == wear)]
                 guidelines = filtered_df['Final Guidelines'].iloc[0]
 
 
