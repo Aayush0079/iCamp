@@ -468,7 +468,7 @@ offer valid for - 7 days'''
         if model == 'Segmind-sdxl':
             # Image resolution in segmind is fixed to 1024x1024
             size_tuple = ('1024x1024')
-            size = st.selectbox('Image Size','1024x1024')
+            size = st.selectbox('Image Size','1024x1024',index = 0)
 
 
             # Image quality
