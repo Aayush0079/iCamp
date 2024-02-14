@@ -432,7 +432,7 @@ offer valid for - 7 days'''
             # Image Resolution
             size_tuple = ('1024x1024', '1024x1792', '1792x1024')
             size = st.selectbox('Image Size', size_tuple, index = 0)
-            
+
             # Image quality
             quality_tuple = ('Standard', 'High Definition')
             quality_list = ['standard', 'hd']
@@ -589,7 +589,7 @@ offer valid for - 7 days'''
 
                 for seed in seeds:
 
-                    response = requests.post(url, json=generate_request_payload(self.prompt,seed, num_samples), headers={'x-api-key': api_key})
+                    response = requests.post(url, json=self.generate_request_payload(self.prompt,seed, num_samples), headers={'x-api-key': api_key})
 
                     if response.status_code == 200:
 
