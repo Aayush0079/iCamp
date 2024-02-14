@@ -468,7 +468,7 @@ offer valid for - 7 days'''
         if model == 'Segmind-sdxl':
             # Image resolution in segmind is fixed to 1024x1024
             size_tuple = ('1024x1024')
-            size = st.selectbox('Image Size', size_tuple, index = 0)
+            size = st.selectbox('Image Size','1024x1024')
 
 
             # Image quality
@@ -586,7 +586,7 @@ offer valid for - 7 days'''
 
                 seeds = [random.randint(0, 999999) for _ in range(num_samples)]
 
-
+                images=[]
                 for seed in seeds:
 
                     response = requests.post(url, json=self.generate_request_payload(self.prompt,seed, num_samples), headers={'x-api-key': api_key})
