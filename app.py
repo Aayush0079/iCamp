@@ -636,7 +636,7 @@ offer valid for - 7 days'''
                     generator.generate_images()
                     generator.display_images()
 
-                if model ==='Segmind-sdxl'
+                if model =='Segmind-sdxl'
                     generator = ImageGeneratorSegmind(final_prompt, num_images, size)
                     generator.generate_images()
                     generator.display_images()
