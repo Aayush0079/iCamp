@@ -9,8 +9,9 @@ azure-storage-blob==12.19.0
 azure-identity==1.15.0
 azure-keyvault-secrets==4.7.0
 pydantic==1.10.13
-
+ipython==8.21.0
 requests==2.31.0
+random2==1.0.2
 
 pillow==9.4.0
 
