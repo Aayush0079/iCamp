@@ -617,7 +617,7 @@ offer valid for - 7 days'''
             
             def display_images(self):
                 for image in self.images:
-                    display(image)
+                    st.image(image, caption='Generated Image', use_column_width=True)
 
 
 
