@@ -12,5 +12,5 @@ pydantic==1.10.13
 
 requests==2.31.0
 
-pillow==10.2.0
+pillow==9.4.0
 
