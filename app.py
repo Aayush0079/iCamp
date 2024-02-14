@@ -406,7 +406,9 @@ offer valid for - 7 days'''
         # Select Model - Defaults to DALL-E-3
         #model_tuple = ('DALL-E-3', 'DALL-E-2')
         #model = st.selectbox('Select Model', model_tuple)
-        model = 'DALL-E-3'
+        #model = 'DALL-E-3'
+        model_tuple =('DALL-E-3', 'Segmind-sdxl')
+        model = st.selectbox('Select Model', model_tuple)
 
         df_model_guide = get_model_guidelines(filename)
         df_model_guide.dropna(inplace = True)
@@ -419,6 +421,12 @@ offer valid for - 7 days'''
             # Image Resolution
             size_tuple = ('1024x1024', '1024x1792', '1792x1024')
             size = st.selectbox('Image Size', size_tuple, index = 0)
+        
+        if model == 'Segmind-sdxl':
+            # Image resolution in segmind is fixed to 1024x1024
+            size_tuple = ('1024x1024')
+            size = st.selectbox('Image Size', size_tuple, index = 0)
+
 
             # Image quality
             quality_tuple = ('Standard', 'High Definition')
@@ -449,7 +457,7 @@ offer valid for - 7 days'''
 
 
             # Number of Images
-            num_images = st.slider('Number of Images', min_value=1, max_value=5, step=1)
+            num_images = st.slider('Number of Images', min_value=1, max_value=3, step=1)
 
 
         ################################################### IMAGE GENERATION CLASSES ##############################################################
@@ -472,6 +480,105 @@ offer valid for - 7 days'''
             def display_images(self):
                 for url in self.image_urls:
                     st.image(url)
+
+        # Class for generating the images using Segmind-sdxl
+        class ImageGeneratorSegmind:
+         
+            def __init__(self, prompt, num_images, size):
+                self.prompt = prompt
+                self.num_images = num_images
+                self.size = size
+                self.image_urls = []
+                self.quality = quality_value 
+
+            def generate_request_payload(self,prompt,seed, num_samples):
+
+                return {
+
+                  "prompt": prompt,
+
+                  #"negative_prompt": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, , disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft",
+
+                  "negative_prompt": "poorly drawn eyes,extra limbs, poorly drawn hands finger,extra hand,multiple fingers,bad eye,multiple hands,poorly drawn hands,bad men hair,missing hand,poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed eyes, deformed body out of frame,bad anatomy,bad fingers, bad hands, missing fingers, blurry, bad anatomy, blurred, watermark",
+
+                  "style": "base",
+
+                  "samples": num_samples,
+
+                  "scheduler": "UniPC",
+
+                  "num_inference_steps": 25,
+
+                  "guidance_scale": 8,
+
+                  "strength": 0.2,
+
+                  "seed": seed,
+
+                  "img_width": 1024,
+
+                  "img_height": 1024,
+
+                  "refiner": True,
+
+                  "high_noise_fraction": 0.8,
+
+                  "base64": False
+
+                }
+
+            def generate_images(self):
+                api_keys = ["SG_b6e45027b1ca6162", "SG_e3a7c58902a8f62f"]
+                #url = "https://api.segmind.com/v1/sdxl1.0-txt2img"
+                url = "https://api.segmind.com/v1/sdxl1.0-realvis"
+                # Randomly select an API key
+
+                api_key = random.choice(api_keys)
+
+                # Number of samples
+
+                num_samples = self.num_images
+
+                # Generate seeds based on the number of samples
+
+                seeds = [random.randint(0, 999999) for _ in range(num_samples)]
+
+
+                for seed in seeds:
+
+                    response = requests.post(url, json=generate_request_payload(self.prompt,seed, num_samples), headers={'x-api-key': api_key})
+
+                    if response.status_code == 200:
+
+                        # Check if the response contains content
+
+                        if response.content:
+                        
+                            image_data = io.BytesIO(response.content)
+
+                            #display(image)
+                            image = Image.open(image_data)
+                            self.images.append(image)
+
+                          
+                              
+
+                        else:
+
+                            print("Error: Response does not contain any content")
+
+                    else:
+
+                        print(f"Error with API key {api_key}:", response.text)
+
+            
+            def display_images(self):
+                for image in self.images:
+                    display(image)
+
+
+
+
 
         # Class for generating the images using DALL-E-3
         class ImageGeneratorDalle3:
@@ -528,6 +635,12 @@ offer valid for - 7 days'''
                     generator = ImageGeneratorDalle2(final_prompt, num_images, size)
                     generator.generate_images()
                     generator.display_images()
+
+                if model ==='Segmind-sdxl'
+                    generator = ImageGeneratorSegmind(final_prompt, num_images, size)
+                    generator.generate_images()
+                    generator.display_images()
+                    
                 if model == 'DALL-E-3':
                     generator = ImageGeneratorDalle3(final_prompt, num_images, size)
                     generator.generate_images()
