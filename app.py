@@ -9,6 +9,15 @@ import pandas as pd
 #import json
 #import io
 import xlsxwriter
+import requests
+
+from PIL import Image
+
+import io
+
+from IPython.display import display
+
+import random
 # Image Generation
 from PIL import Image
 from openai import OpenAI
@@ -421,31 +430,7 @@ offer valid for - 7 days'''
             # Image Resolution
             size_tuple = ('1024x1024', '1024x1792', '1792x1024')
             size = st.selectbox('Image Size', size_tuple, index = 0)
-
             
-            # Enable Model Guidelines
-            enable_model_guidelines = st.checkbox("Enable Model Guidelines", key=None)
-
-            if enable_model_guidelines:
-                # Image cuts
-                Model_tuple = tuple(df_model_guide['Model Cuts'].unique())
-                Model_Cuts = st.selectbox('Model Cuts', Model_tuple, index = 0)
-
-                #category_tuple = tuple(df_model_guide['Category'].unique())
-                #category = st.selectbox('Category', category_tuple, index = 0)
-
-                #age_band_tuple = tuple(df_model_guide['Age Band'].unique())
-                #age_band = st.selectbox('Age Band', age_band_tuple, index = 0)
-
-                #wear_band_tuple = tuple(df_model_guide['Wear'].unique())
-                #wear = st.selectbox('Wear', wear_band_tuple, index = 0)
-
-                filtered_df = df_model_guide[(df_model_guide['Model Cuts'] == Model_Cuts) ] # & (df_model_guide['Category'] == category) & (df_model_guide['Age Band'] == age_band) & (df_model_guide['Wear'] == wear)]
-                guidelines = filtered_df['Final Guidelines'].iloc[0]
-
-
-            # Number of Images
-            num_images = st.slider('Number of Images', min_value=1, max_value=3, step=1)
         
         if model == 'Segmind-sdxl':
             # Image resolution in segmind is fixed to 1024x1024
