@@ -571,7 +571,7 @@ offer valid for - 7 days'''
                 }
 
             def generate_images(self):
-                api_keys = ["SG_b6e45027b1ca6162", "SG_e3a7c58902a8f62f"]
+                api_keys = ["SG_b6e45027b1ca6162", "SG_e3a7c58902a8f62f","SG_a7acf7af520ad30a","SG_4fbd24b92b397239"]
                 #url = "https://api.segmind.com/v1/sdxl1.0-txt2img"
                 url = "https://api.segmind.com/v1/sdxl1.0-realvis"
                 # Randomly select an API key
